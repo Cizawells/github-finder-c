@@ -1,11 +1,14 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useContext } from "react";
+import AlertContext from "../../context/alert/alertContext";
 
-const Alert = ({ alert }) => {
+const Alert = () => {
+  const alertContext = useContext(AlertContext);
+  const { alert } = alertContext;
   return (
     <Fragment>
       {alert && (
         <div className={`alert ${alert.type}`}>
-          <i className="fas fa-info-circle" /> {alert.message}
+          <i className="fas fa-info-circle" /> {alert.msg}
         </div>
       )}
     </Fragment>

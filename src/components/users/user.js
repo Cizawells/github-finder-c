@@ -1,17 +1,18 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect, Fragment, useContext } from "react";
 import { Link } from "react-router-dom";
 import Repos from "../repos/repos";
+import GithubContext from "../../context/github/githubContext";
 
-const User = ({ user, repos, getRepos, searchUser, match }) => {
+const User = ({ match }) => {
+  const githubContext = useContext(GithubContext);
+
+  const { user, repos, getRepos, getUser } = githubContext;
   useEffect(() => {
-    searchUser(match.params.login);
+    getUser(match.params.login);
     getRepos(match.params.login);
     //eslint-disable-next-line
   }, []);
-  // componentDidMount() {
-  // searchUser(match.params.login);
-  // getRepos(match.params.login);
-  // }
+
   const {
     login,
     avatar_url,
@@ -25,7 +26,7 @@ const User = ({ user, repos, getRepos, searchUser, match }) => {
     location,
     public_repos,
     public_gists,
-    name
+    name,
   } = user;
   return (
     <Fragment>
